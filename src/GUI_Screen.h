@@ -3,17 +3,24 @@
 
 #include "Arduino.h"
 #include "TFT_Gui.h"
+#include "GUI_Form.h"
 
 class GUI_Screen : public GUI_Container
 {
 public:
     GUI_Screen(TFT_eSPI *tft);
-    GUI_Screen(TFT_eSPI *tft, uint32_t backgroundColor);
+    void init();
 
-    
+    void addPage(GUI_Base *page);
+
+    int getActivePage() { return _selectedPage; }
+    void setActivePage(int page);
 
     void drawSelf();
 
 private:
+protected:
+    int _selectedPage = -1;
 };
-#endif // _GUI_SCREEN_H_
+
+#endif
